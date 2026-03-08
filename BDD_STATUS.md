@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 8 scenario(s) across 6 test file(s).
+Checked 8 scenario(s) across 7 test file(s).
 
 
 ## Feature: code extraction
@@ -30,10 +30,7 @@ Checked 8 scenario(s) across 6 test file(s).
 
 ## Feature: A readme that is friendly for users who just want to get started
 
-- [ ] UNCOVERED: A new user to the Mooch ecosystem
+- [x] A new user to the Mooch ecosystem
 
 ---
-**7/8 scenarios covered.**
-
-1 scenario(s) need tests:
-- A new user to the Mooch ecosystem
+**8/8 scenarios covered.**
