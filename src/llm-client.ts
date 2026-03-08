@@ -58,12 +58,18 @@ async function callOpenAICompatible(
 ): Promise<string> {
   const url = `${config.baseUrl.replace(/\/$/, '')}/chat/completions`;
 
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json'
+  };
+
+  // Only include Authorization header if API key is provided
+  if (config.apiKey) {
+    headers['Authorization'] = `Bearer ${config.apiKey}`;
+  }
+
   const response = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${config.apiKey}`
-    },
+    headers,
     body: JSON.stringify({
       model: config.model,
       messages: [
