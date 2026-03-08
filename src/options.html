@@ -4,13 +4,57 @@
   <meta charset="utf-8">
   <title>Mooch Helper - Settings</title>
   <style>
-    body { font-family: sans-serif; padding: 16px; max-width: 480px; }
-    h1 { font-size: 1.1rem; margin-bottom: 16px; }
-    form { display: flex; flex-direction: column; gap: 12px; }
-    label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
-    input, select { padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; }
-    button { padding: 8px 16px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    #status { color: green; font-size: 0.85rem; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1f2e;
+      color: #e0e6f0;
+      padding: 24px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1rem; font-weight: 600; margin: 0 0 20px; }
+    form { display: flex; flex-direction: column; gap: 16px; }
+    #options { display: flex; flex-direction: column; gap: 16px; }
+    #provider-extras { display: flex; flex-direction: column; gap: 16px; }
+    div > label {
+      display: block;
+      font-size: 0.8rem;
+      color: #8b95a8;
+      margin-bottom: 6px;
+    }
+    input, select {
+      display: block;
+      width: 100%;
+      padding: 10px 12px;
+      background: #252d3d;
+      border: 1px solid #3a4459;
+      border-radius: 6px;
+      color: #e0e6f0;
+      font-size: 0.9rem;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #5b7fe8;
+    }
+    small {
+      display: block;
+      font-size: 0.75rem;
+      color: #6b7585;
+      margin-top: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #3d5afe;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    button:hover { background: #5b7afe; }
+    #status { font-size: 0.85rem; color: #4caf50; }
   </style>
 </head>
 <body>

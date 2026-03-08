@@ -7,40 +7,75 @@ export type OptionsState =
 export function renderOptions(container: HTMLElement, state: OptionsState): void {
   container.innerHTML = '';
 
-  const providerLabel = document.createElement('label');
-  providerLabel.textContent = 'Provider: ';
-  const providerSelect = document.createElement('select');
-  providerSelect.name = 'provider';
-  [
+  // Provider selector
+  container.appendChild(makeSelect('Provider', 'provider', [
     { value: 'anthropic', label: 'Anthropic' },
     { value: 'openai-compatible', label: 'OpenAI-compatible' }
-  ].forEach(({ value, label }) => {
-    const opt = document.createElement('option');
-    opt.value = value;
-    opt.textContent = label;
-    opt.selected = value === state.provider;
-    providerSelect.appendChild(opt);
-  });
-  providerLabel.appendChild(providerSelect);
-  container.appendChild(providerLabel);
+  ], state.provider));
 
   container.appendChild(makeInput('API Key', 'apiKey', 'password', state.apiKey));
 
+  // Provider-specific fields
+  const extras = document.createElement('div');
+  extras.id = 'provider-extras';
+  renderExtras(extras, state);
+  container.appendChild(extras);
+
+  // Re-render extras when provider changes
+  const select = container.querySelector<HTMLSelectElement>('select[name="provider"]')!;
+  select.addEventListener('change', () => {
+    const apiKey = container.querySelector<HTMLInputElement>('input[name="apiKey"]')?.value ?? '';
+    const newState: OptionsState = select.value === 'openai-compatible'
+      ? { provider: 'openai-compatible', apiKey, baseUrl: '', model: '' }
+      : { provider: 'anthropic', apiKey, model: 'claude-haiku-4-5-20251001' };
+    renderExtras(extras, newState);
+  });
+}
+
+function renderExtras(container: HTMLElement, state: OptionsState): void {
+  container.innerHTML = '';
   if (state.provider === 'openai-compatible') {
-    container.appendChild(makeInput('Base URL', 'baseUrl', 'text', state.baseUrl));
-    container.appendChild(makeInput('Model', 'model', 'text', state.model));
+    container.appendChild(makeInput('Base URL (optional)', 'baseUrl', 'text', state.baseUrl));
+    container.appendChild(makeInput('Model', 'model', 'text', state.model, 'Model names may be case-sensitive'));
+  } else {
+    container.appendChild(makeInput('Model', 'model', 'text', state.model, 'e.g. claude-haiku-4-5-20251001'));
   }
 }
 
-function makeInput(labelText: string, name: string, type: string, value: string): HTMLElement {
+function makeInput(labelText: string, name: string, type: string, value: string, hint?: string): HTMLElement {
+  const wrapper = document.createElement('div');
   const label = document.createElement('label');
-  label.textContent = `${labelText}: `;
+  label.textContent = labelText;
   const input = document.createElement('input');
   input.type = type;
   input.name = name;
   input.value = value;
-  label.appendChild(input);
-  return label;
+  wrapper.appendChild(label);
+  wrapper.appendChild(input);
+  if (hint) {
+    const small = document.createElement('small');
+    small.textContent = hint;
+    wrapper.appendChild(small);
+  }
+  return wrapper;
+}
+
+function makeSelect(labelText: string, name: string, options: { value: string; label: string }[], selected: string): HTMLElement {
+  const wrapper = document.createElement('div');
+  const label = document.createElement('label');
+  label.textContent = labelText;
+  const select = document.createElement('select');
+  select.name = name;
+  options.forEach(({ value, label: optLabel }) => {
+    const opt = document.createElement('option');
+    opt.value = value;
+    opt.textContent = optLabel;
+    opt.selected = value === selected;
+    select.appendChild(opt);
+  });
+  wrapper.appendChild(label);
+  wrapper.appendChild(select);
+  return wrapper;
 }
 
 export function saveConfig(config: OptionsState): Promise<void> {
