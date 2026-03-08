@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Mooch Helper",
+  "version": "1.0.0",
+  "description": "Assists during technical interviews by extracting code and providing LLM hints",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://www.hackerrank.com/*",
+    "https://www.codewars.com/*",
+    "https://app.coderpad.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/*",
+        "https://www.hackerrank.com/*",
+        "https://www.codewars.com/*",
+        "https://app.coderpad.io/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Mooch Helper"
+  },
+  "options_page": "options.html"
+}
