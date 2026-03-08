@@ -69,6 +69,18 @@ System: a Chrome extension called Mooch Helper that assists users during technic
             When the content script starts polling every 8 seconds
             Then it should compare the current code state with the previous one
 
+    Feature: hint formatting
+
+        Scenario: render markdown in hint responses
+            Given the LLM returns a hint response containing markdown (headings, bold, italics, bullet lists, inline code, code blocks)
+            When the hint is displayed in the popup
+            Then the raw markdown syntax should not be visible
+            And headings should appear as larger styled text
+            And bold and italic text should be visually emphasised
+            And bullet lists should render as proper list items
+            And inline code should appear in a monospace styled format
+            And fenced code blocks should render as a distinct styled code block with syntax preserved and horizontal scrolling if needed
+
     Feature: A readme that is friendly for users who just want to get started
 
         Background:
