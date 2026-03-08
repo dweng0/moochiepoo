@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 8 scenario(s) across 3 test file(s).
+Checked 8 scenario(s) across 4 test file(s).
 
 
 ## Feature: code extraction
@@ -17,8 +17,8 @@ Checked 8 scenario(s) across 3 test file(s).
 
 ## Feature: API key configuration
 
-- [ ] UNCOVERED: user can configure their API key
-- [ ] UNCOVERED: Configure an open ai key
+- [x] user can configure their API key
+- [x] Configure an open ai key
 
 ## Feature: supported sites
 
@@ -33,11 +33,9 @@ Checked 8 scenario(s) across 3 test file(s).
 - [ ] UNCOVERED: A new user to the Mooch ecosystem
 
 ---
-**3/8 scenarios covered.**
+**5/8 scenarios covered.**
 
-5 scenario(s) need tests:
-- user can configure their API key
-- Configure an open ai key
+3 scenario(s) need tests:
 - works on major coding challenge platforms
 - detect and respond to code changes via polling
 - A new user to the Mooch ecosystem
