@@ -11,3 +11,4 @@
 - Day 3: LLM client supporting Anthropic and OpenAI-compatible APIs.
 - Day 2: Popup UI with loading/ready/error/no-code states.
 - Day 1: Project bootstrap (TS/Webpack/Jest). Code extraction from Monaco and CodeMirror editors.
+| 1 | 2026-03-08 | 12:51 | 9/11 | Day 1 (12:51): project checked — all scenarios complete, no open issues |
