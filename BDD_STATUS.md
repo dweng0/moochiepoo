@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 8 scenario(s) across 5 test file(s).
+Checked 8 scenario(s) across 6 test file(s).
 
 
 ## Feature: code extraction
@@ -26,15 +26,14 @@ Checked 8 scenario(s) across 5 test file(s).
 
 ## Feature: intelligent code change detection
 
-- [ ] UNCOVERED: detect and respond to code changes via polling
+- [x] detect and respond to code changes via polling
 
 ## Feature: A readme that is friendly for users who just want to get started
 
 - [ ] UNCOVERED: A new user to the Mooch ecosystem
 
 ---
-**6/8 scenarios covered.**
+**7/8 scenarios covered.**
 
-2 scenario(s) need tests:
-- detect and respond to code changes via polling
+1 scenario(s) need tests:
 - A new user to the Mooch ecosystem
