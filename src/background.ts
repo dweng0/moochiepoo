@@ -26,7 +26,7 @@ async function handleHintRequest(): Promise<void> {
   try {
     const hints = await requestHint({
       code: extractedCode,
-      pageTitle: pageTitle ?? document.title,
+      pageTitle: pageTitle ?? 'Coding Challenge',
       config: llmConfig as LLMConfig
     });
     chrome.storage.local.set({ hints, hintsError: null });
