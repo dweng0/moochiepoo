@@ -57,3 +57,13 @@ System: a Chrome extension called Mooch Helper that assists users during technic
             Given the extension is active on a coding challenge page
             When the content script starts polling every 8 seconds
             Then it should compare the current code state with the previous one
+
+    Feature: A readme that is friendly for users who just want to get started
+
+        Background:
+            Given All other features are implemented, so the readme does not need to be updated
+
+        Scenario: A new user to the Mooch ecosystem
+            Given a user is new to the repo
+            When They go to the repo
+            Then They should see an informative and intuitive README.
