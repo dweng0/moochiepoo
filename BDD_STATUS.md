@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 8 scenario(s) across 1 test file(s).
+Checked 8 scenario(s) across 2 test file(s).
 
 
 ## Feature: code extraction
@@ -9,7 +9,7 @@ Checked 8 scenario(s) across 1 test file(s).
 
 ## Feature: hints and tips
 
-- [ ] UNCOVERED: display hints in popup
+- [x] display hints in popup
 
 ## Feature: LLM integration
 
@@ -33,10 +33,9 @@ Checked 8 scenario(s) across 1 test file(s).
 - [ ] UNCOVERED: A new user to the Mooch ecosystem
 
 ---
-**1/8 scenarios covered.**
+**2/8 scenarios covered.**
 
-7 scenario(s) need tests:
-- display hints in popup
+6 scenario(s) need tests:
 - send code context to LLM
 - user can configure their API key
 - Configure an open ai key
