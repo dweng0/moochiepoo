@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 8 scenario(s) across 7 test file(s).
+Checked 9 scenario(s) across 8 test file(s).
 
 
 ## Feature: code extraction
@@ -10,6 +10,7 @@ Checked 8 scenario(s) across 7 test file(s).
 ## Feature: hints and tips
 
 - [x] display hints in popup
+- [x] user requests a hint via button
 
 ## Feature: LLM integration
 
@@ -33,4 +34,4 @@ Checked 8 scenario(s) across 7 test file(s).
 - [x] A new user to the Mooch ecosystem
 
 ---
-**8/8 scenarios covered.**
+**9/9 scenarios covered.**
