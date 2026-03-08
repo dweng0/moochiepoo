@@ -1,5 +1,5 @@
 # Mooch Helper
-
+[![Evolution](https://github.com/dweng0/moochiepoo/actions/workflows/evolve.yml/badge.svg)](https://github.com/dweng0/moochiepoo/actions/workflows/evolve.yml)
 A Chrome extension that assists you during technical interviews by extracting code from coding challenge websites and providing LLM-powered hints — without giving away the answer.
 
 ## What it does
