@@ -3,7 +3,7 @@
   "name": "Mooch Helper",
   "version": "1.0.0",
   "description": "Assists during technical interviews by extracting code and providing LLM hints",
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
   "host_permissions": [
     "https://leetcode.com/*",
     "https://www.hackerrank.com/*",
