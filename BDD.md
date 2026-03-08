@@ -1,0 +1,59 @@
+---
+language: Typscript
+framework: chrome-extension, jest
+build_cmd: npm run build
+test_cmd: npm test
+birth_date: 2026-03-07
+---
+
+System: a Chrome extension called Mooch Helper that assists users during technical interviews by extracting code from coding challenge websites and providing hints and tips via an LLM.
+
+    Feature: code extraction
+
+        Scenario: extract code from coding challenge page
+            Given a user is on a coding challenge website (e.g. LeetCode, HackerRank, Codewars)
+            When the page loads
+            Then the extension should extract all code from the page as plain text
+
+    Feature: hints and tips
+
+        Scenario: display hints in popup
+            Given the extension has extracted code from the page
+            When the user opens the extension popup
+            Then the popup should display LLM-generated hints and tips for the code challenge
+
+    Feature: LLM integration
+
+        Scenario: send code context to LLM
+            Given code has been extracted from the page
+            When the user requests a hint
+            Then the extension should send the code and page context to an LLM and return a helpful response
+
+    Feature: API key configuration
+
+        Scenario: user can configure their API key
+            Given the user has an Anthropic API key
+            When they open the extension settings
+            Then they should be able to enter and save their API key securely
+
+        Scenario: Configure an open ai key
+            Given A user has a key from an open ai compatible llm like qwen
+            When add the api key, the base url and the model
+            Then The model should be used.
+
+    Feature: supported sites
+
+        Scenario: works on major coding challenge platforms
+            Given the user navigates to LeetCode, HackerRank, Codewars, or CoderPad
+            When the extension content script runs
+            Then it should successfully identify and extract the code editor content
+
+    Feature: intelligent code change detection
+
+        Background:
+            Given The user is logged in and there is code available.
+
+        Scenario: detect and respond to code changes via polling
+            Given the extension is active on a coding challenge page
+            When the content script starts polling every 8 seconds
+            Then it should compare the current code state with the previous one
