@@ -1,5 +1,5 @@
 ---
-language: Typscript
+language: TypeScript
 framework: chrome-extension, jest
 build_cmd: npm run build
 test_cmd: npm test
