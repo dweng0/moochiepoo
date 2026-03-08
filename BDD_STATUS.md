@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 8 scenario(s) across 2 test file(s).
+Checked 8 scenario(s) across 3 test file(s).
 
 
 ## Feature: code extraction
@@ -13,7 +13,7 @@ Checked 8 scenario(s) across 2 test file(s).
 
 ## Feature: LLM integration
 
-- [ ] UNCOVERED: send code context to LLM
+- [x] send code context to LLM
 
 ## Feature: API key configuration
 
@@ -33,10 +33,9 @@ Checked 8 scenario(s) across 2 test file(s).
 - [ ] UNCOVERED: A new user to the Mooch ecosystem
 
 ---
-**2/8 scenarios covered.**
+**3/8 scenarios covered.**
 
-6 scenario(s) need tests:
-- send code context to LLM
+5 scenario(s) need tests:
 - user can configure their API key
 - Configure an open ai key
 - works on major coding challenge platforms
