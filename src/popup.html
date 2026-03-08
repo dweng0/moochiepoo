@@ -4,13 +4,46 @@
   <meta charset="utf-8">
   <title>Mooch Helper</title>
   <style>
-    body { font-family: sans-serif; width: 320px; padding: 12px; }
-    h1 { font-size: 1rem; margin: 0 0 8px; }
-    pre { white-space: pre-wrap; word-break: break-word; font-size: 0.85rem; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1f2e;
+      color: #e0e6f0;
+      width: 340px;
+      padding: 16px;
+      margin: 0;
+    }
+    h1 { font-size: 0.95rem; font-weight: 600; margin: 0 0 12px; }
+    #btn-container { margin-bottom: 12px; }
+    #get-hint-btn {
+      padding: 8px 16px;
+      background: #3d5afe;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      width: 100%;
+    }
+    #get-hint-btn:hover:not([disabled]) { background: #5b7afe; }
+    #get-hint-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+    #hints {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #c8d0e0;
+    }
+    #hints pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+      font-family: inherit;
+    }
+    #hints p { margin: 0; }
   </style>
 </head>
 <body>
   <h1>Mooch Helper</h1>
+  <div id="btn-container"></div>
   <div id="hints"></div>
   <script src="popup.js"></script>
 </body>

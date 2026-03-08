@@ -22,6 +22,11 @@ System: a Chrome extension called Mooch Helper that assists users during technic
             When the user opens the extension popup
             Then the popup should display LLM-generated hints and tips for the code challenge
 
+        Scenario: user requests a hint via button
+            Given the user has opened the extension popup on a supported coding challenge page
+            When they click the Get Hint button
+            Then the popup should show a loading state and then display the LLM response
+
     Feature: LLM integration
 
         Scenario: send code context to LLM
