@@ -46,6 +46,12 @@ System: a Chrome extension called Mooch Helper that assists users during technic
             When add the api key, the base url and the model
             Then The model should be used.
 
+        Scenario: Configure a local Ollama model
+            Given a user has Ollama running locally with a model pulled
+            When they open the extension settings and select OpenAI-compatible provider
+            And they enter a localhost base URL (e.g. http://localhost:11434/v1) and a model name but no API key
+            Then the extension should send hint requests to the local Ollama instance successfully
+
     Feature: supported sites
 
         Scenario: works on major coding challenge platforms

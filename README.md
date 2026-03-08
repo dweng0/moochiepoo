@@ -18,6 +18,26 @@ A Chrome extension that assists you during technical interviews by extracting co
 | Codewars | codewars.com |
 | CoderPad | coderpad.io |
 
+## Supported LLMs
+
+The extension works with Anthropic Claude natively, and any OpenAI-compatible API — including local models via Ollama.
+
+| Provider | Type | Notes |
+|---|---|---|
+| [Anthropic Claude](https://console.anthropic.com) | Cloud | Native support; recommended default |
+| [OpenAI](https://platform.openai.com) | Cloud | GPT-4o, GPT-4.1, etc. |
+| [Qwen](https://dashscope.aliyuncs.com) | Cloud | Qwen2.5-Coder models work well |
+| [Google Gemini](https://aistudio.google.com) | Cloud | Via OpenAI-compatible endpoint |
+| [Groq](https://console.groq.com) | Cloud | Fast inference; Llama, Mixtral, etc. |
+| [Together AI](https://api.together.xyz) | Cloud | Wide model selection |
+| [Ollama](https://ollama.com) | Local | Run models locally; no API key needed |
+| [LM Studio](https://lmstudio.ai) | Local | Local OpenAI-compatible server |
+| [Jan](https://jan.ai) | Local | Local OpenAI-compatible server |
+
+For any OpenAI-compatible provider, set the base URL to the provider's endpoint and enter your model name in Settings.
+
+**Ollama example**: base URL `http://localhost:11434/v1`, model `qwen2.5-coder:7b`, no API key required (enter any placeholder).
+
 ## Quick start
 
 ### 1. Get an API key

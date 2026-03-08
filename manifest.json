@@ -8,7 +8,8 @@
     "https://leetcode.com/*",
     "https://www.hackerrank.com/*",
     "https://www.codewars.com/*",
-    "https://app.coderpad.io/*"
+    "https://app.coderpad.io/*",
+    "http://localhost/*"
   ],
   "background": {
     "service_worker": "background.js"
