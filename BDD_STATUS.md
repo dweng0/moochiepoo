@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 11 scenario(s) across 8 test file(s).
+Checked 11 scenario(s) across 10 test file(s).
 
 
 ## Feature: code extraction
@@ -20,7 +20,7 @@ Checked 11 scenario(s) across 8 test file(s).
 
 - [x] user can configure their API key
 - [x] Configure an open ai key
-- [ ] UNCOVERED: Configure a local Ollama model
+- [x] Configure a local Ollama model
 
 ## Feature: supported sites
 
@@ -32,15 +32,11 @@ Checked 11 scenario(s) across 8 test file(s).
 
 ## Feature: hint formatting
 
-- [ ] UNCOVERED: render markdown in hint responses
+- [x] render markdown in hint responses
 
 ## Feature: A readme that is friendly for users who just want to get started
 
 - [x] A new user to the Mooch ecosystem
 
 ---
-**9/11 scenarios covered.**
-
-2 scenario(s) need tests:
-- Configure a local Ollama model
-- render markdown in hint responses
+**11/11 scenarios covered.**
