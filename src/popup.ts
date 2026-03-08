@@ -11,7 +11,17 @@ const btn = createGetHintButton(hintsDiv, renderHints);
 btnContainer.appendChild(btn);
 
 // Show current state on open
-chrome.storage.local.get(['extractedCode', 'hints', 'hintsError'], (result) => {
+chrome.storage.local.get(['extractedCode', 'hints', 'hintsError', 'llmConfig'], (result) => {
+  if (!result.llmConfig) {
+    hintsDiv.innerHTML = `<p class="setup-msg">No API key configured. <a id="open-options" href="#">Open Settings →</a></p>`;
+    document.getElementById('open-options')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      chrome.runtime.openOptionsPage();
+    });
+    btn.setAttribute('disabled', 'true');
+    return;
+  }
+
   let state: HintsState;
   if (!result.extractedCode) {
     state = { status: 'no-code' };
