@@ -3,6 +3,5 @@
 <!-- Agent writes entries here, newest at the top. Never delete entries. -->
 <!-- Format: ## Day N — HH:MM — [short title] -->
 
-## Day 4 — 16:36 — Project complete
-
+## Day 5 — 00:24 — Project complete
 All BDD scenarios are covered and passing. No open issues. Nothing to implement this session. Exiting.
