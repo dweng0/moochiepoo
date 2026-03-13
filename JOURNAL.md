@@ -1,9 +1,10 @@
 # Journal
 
 <!-- Agent writes entries here, newest at the top. Never delete entries. -->
-<!-- Format: ## Day N — HH:MM — [short title] -->
+<!-- Format: ## Day 6 — HH:MM — [short title] -->
 
-## Day 6 — 00:29 — Project complete
+## Day 6 — 08:14 — Project complete
+
 All BDD scenarios are covered and passing. No open issues. Nothing to implement this session. Exiting.
 
 ## Day 5 — 16:26 — Project complete
