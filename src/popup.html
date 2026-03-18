@@ -9,7 +9,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: #1a1f2e;
       color: #e0e6f0;
-      width: 360px;
+      width: 550px;
       padding: 16px;
       margin: 0;
     }
@@ -27,12 +27,49 @@
     }
     #get-hint-btn:hover:not([disabled]) { background: #5b7afe; }
     #get-hint-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
-    #hints { font-size: 0.85rem; line-height: 1.5; color: #c8d0e0; }
+    #hints { font-size: 0.85rem; line-height: 1.6; color: #c8d0e0; max-height: 400px; overflow-y: auto; }
+    #hints p { margin: 4px 0; }
+    #hints h1, #hints h2, #hints h3 { color: #e0e6f0; margin: 10px 0 4px; }
+    #hints h1 { font-size: 1rem; }
+    #hints h2 { font-size: 0.95rem; }
+    #hints h3 { font-size: 0.9rem; }
+    #hints strong { color: #e0e6f0; }
+    #hints em { font-style: italic; color: #a8b4c8; }
+    #hints ul { margin: 4px 0; padding-left: 18px; }
+    #hints li { margin: 2px 0; }
+    #hints pre {
+      background: #111520;
+      border: 1px solid #2d3748;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 8px 0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    #hints pre code {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #68d391;
+      background: none;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+    }
+    #hints code {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.8rem;
+      background: #111520;
+      color: #68d391;
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px solid #2d3748;
+    }
     .setup-msg { margin: 0; color: #8b95a8; }
     .setup-msg a { color: #5b7afe; text-decoration: none; }
     .setup-msg a:hover { text-decoration: underline; }
-    #hints pre { white-space: pre-wrap; word-break: break-word; margin: 0; font-family: inherit; }
-    #hints p { margin: 0; }
+    .streaming-indicator { color: #3d5afe; animation: pulse 1s infinite; margin-left: 4px; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     #debug-toggle {
       margin-top: 14px;
       font-size: 0.72rem;

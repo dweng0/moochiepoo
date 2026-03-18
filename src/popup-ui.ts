@@ -8,69 +8,64 @@ export type HintsState =
   | { status: 'error'; message: string }
   | { status: 'no-code' };
 
-// Simple markdown to HTML converter
+// Markdown to HTML converter
 function markdownToHtml(markdown: string): string {
   if (!markdown) return '';
 
   let html = markdown;
 
-  // First, handle code blocks - replace them with placeholders to avoid interference
-  const codeBlockRegex = /```(\w+)?\n(.*?)\n```/gs;
+  // Extract code blocks first, replace with placeholders to protect from further processing
   const codeBlocks: string[] = [];
-  let match;
-  while ((match = codeBlockRegex.exec(html)) !== null) {
-    codeBlocks.push(match[0]);
-  }
-  
-  // Convert code blocks to proper HTML
-  html = html.replace(/```(\w+)?\n(.*?)\n```/gs, '<pre><code class="$1">$2</code></pre>');
+  html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, (_match, lang, code) => {
+    const idx = codeBlocks.length;
+    const escaped = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    codeBlocks.push(`<pre><code class="${lang}">${escaped.trimEnd()}</code></pre>`);
+    return `%%CODEBLOCK_${idx}%%`;
+  });
 
-  // Convert headings (# Header -> <h1>Header</h1>)
+  // Extract inline code, replace with placeholders
+  const inlineCodes: string[] = [];
+  html = html.replace(/`([^`]+)`/g, (_match, code) => {
+    const idx = inlineCodes.length;
+    const escaped = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    inlineCodes.push(`<code>${escaped}</code>`);
+    return `%%INLINE_${idx}%%`;
+  });
+
+  // Headings
   html = html.replace(/^### (.*)$/gm, '<h3>$1</h3>');
   html = html.replace(/^## (.*)$/gm, '<h2>$1</h2>');
   html = html.replace(/^# (.*)$/gm, '<h1>$1</h1>');
 
-  // Convert bold (**text** -> <strong>text</strong>)
+  // Bold then italic (order matters)
   html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-  // Convert italic (*text* -> <em>text</em>)
   html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-  // Convert bullet lists (- item -> <li>item</li>)
+  // Bullet lists
   html = html.replace(/^- (.*$)/gm, '<li>$1</li>');
 
-  // Wrap lists in <ul> tags
+  // Wrap consecutive <li> in <ul>
   const lines = html.split('\n');
   let inList = false;
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].startsWith('<li>')) {
-      if (!inList) {
-        lines[i] = '<ul>' + lines[i];
-        inList = true;
-      }
-    } else {
-      if (inList && !lines[i].startsWith('<')) {
-        // If we're in a list and encounter non-tag text, close the list
-        lines[i] = '</ul>' + lines[i];
-        inList = false;
-      }
+      if (!inList) { lines[i] = '<ul>' + lines[i]; inList = true; }
+    } else if (inList) {
+      lines[i - 1] += '</ul>';
+      inList = false;
     }
   }
-  if (inList) {
-    lines.push('</ul>');
-  }
+  if (inList) lines[lines.length - 1] += '</ul>';
   html = lines.join('\n');
 
-  // Convert inline code (`code` -> <code>code</code>)
-  html = html.replace(/`(.*?)`/g, '<code>$1</code>');
-
-  // Convert newlines to <br> tags
+  // Newlines to <br> (but not inside code blocks)
   html = html.replace(/\n/g, '<br>');
+  html = html.replace(/^(<br>)+/, '').replace(/(<br>)+$/, '');
 
-  // Remove extra <br> tags at the beginning and end
-  html = html.replace(/<br>$/g, '');
-  html = html.replace(/^<br>/g, '');
-  
+  // Restore code blocks and inline code
+  codeBlocks.forEach((block, i) => { html = html.replace(`%%CODEBLOCK_${i}%%`, block); });
+  inlineCodes.forEach((code, i) => { html = html.replace(`%%INLINE_${i}%%`, code); });
+
   return html;
 }
 

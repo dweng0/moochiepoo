@@ -9,14 +9,14 @@ export interface HintRequest {
 }
 
 const SYSTEM_PROMPT =
-  'You are a helpful coding interview assistant. Given a coding challenge and the user\'s current code, provide concise hints and tips to guide them — without giving away the full solution.';
+  'You are a helpful coding interview assistant. Given a coding challenge and the user\'s current code, provide hints, tips, and concrete code examples to help them solve it. Include short code snippets showing relevant patterns, data structure usage, or partial implementations that illustrate the approach.';
 
 export function buildPrompt(code: string, pageTitle: string, language?: string | null): string {
   let prompt = `Challenge: ${pageTitle}\n\n`;
   if (language) {
     prompt += `Language: ${language}\n\n`;
   }
-  prompt += `Current code:\n\`\`\`\n${code}\n\`\`\`\n\nProvide helpful hints and tips for solving this challenge.`;
+  prompt += `Current code:\n\`\`\`\n${code}\n\`\`\`\n\nProvide helpful hints with concrete code examples showing the approach.`;
   return prompt;
 }
 

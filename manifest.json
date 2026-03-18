@@ -9,7 +9,11 @@
     "https://www.hackerrank.com/*",
     "https://www.codewars.com/*",
     "https://app.coderpad.io/*",
-    "http://localhost/*"
+    "https://app.codesignal.com/*",
+    "https://exercism.org/*",
+    "https://www.algoexpert.io/*",
+    "http://localhost/*",
+    "https://*/*"
   ],
   "background": {
     "service_worker": "background.js"
