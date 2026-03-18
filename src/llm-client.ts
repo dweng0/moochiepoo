@@ -11,8 +11,13 @@ export interface HintRequest {
 const SYSTEM_PROMPT =
   'You are a helpful coding interview assistant. Given a coding challenge and the user\'s current code, provide concise hints and tips to guide them — without giving away the full solution.';
 
-function buildPrompt(code: string, pageTitle: string): string {
-  return `Challenge: ${pageTitle}\n\nCurrent code:\n\`\`\`\n${code}\n\`\`\`\n\nProvide helpful hints and tips for solving this challenge.`;
+export function buildPrompt(code: string, pageTitle: string, language?: string | null): string {
+  let prompt = `Challenge: ${pageTitle}\n\n`;
+  if (language) {
+    prompt += `Language: ${language}\n\n`;
+  }
+  prompt += `Current code:\n\`\`\`\n${code}\n\`\`\`\n\nProvide helpful hints and tips for solving this challenge.`;
+  return prompt;
 }
 
 export async function requestHint({ code, pageTitle, config }: HintRequest): Promise<string> {
