@@ -13,22 +13,27 @@ async function init(): Promise<void> {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const data = new FormData(form);
-  const provider = data.get('provider') as string;
+  const connectionMode = data.get('connectionMode') as string;
 
   let config: OptionsState;
-  if (provider === 'openai-compatible') {
-    config = {
-      provider: 'openai-compatible',
-      apiKey: data.get('apiKey') as string,
-      baseUrl: data.get('baseUrl') as string,
-      model: data.get('model') as string
-    };
+  if (connectionMode === 'mooch') {
+    config = { provider: 'mooch' };
   } else {
-    config = {
-      provider: 'anthropic',
-      apiKey: data.get('apiKey') as string,
-      model: (data.get('model') as string) || 'claude-haiku-4-5-20251001'
-    };
+    const provider = data.get('provider') as string;
+    if (provider === 'openai-compatible') {
+      config = {
+        provider: 'openai-compatible',
+        apiKey: data.get('apiKey') as string,
+        baseUrl: data.get('baseUrl') as string,
+        model: data.get('model') as string
+      };
+    } else {
+      config = {
+        provider: 'anthropic',
+        apiKey: data.get('apiKey') as string,
+        model: (data.get('model') as string) || 'claude-haiku-4-5-20251001'
+      };
+    }
   }
 
   await saveConfig(config);

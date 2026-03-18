@@ -100,6 +100,6 @@ describe('Scenario: Configure a local Ollama model', () => {
     const config = await loadConfig();
     expect(config?.provider).toBe('openai-compatible');
     expect((config as { baseUrl?: string })?.baseUrl).toBe('http://localhost:11434/v1');
-    expect(config?.model).toBe('codellama');
+    expect((config as { model?: string })?.model).toBe('codellama');
   });
 });

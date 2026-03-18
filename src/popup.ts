@@ -11,15 +11,26 @@ const btn = createGetHintButton(hintsDiv, renderHints);
 btnContainer.appendChild(btn);
 
 // Show current state on open
-chrome.storage.local.get(['extractedCode', 'hints', 'hintsError', 'llmConfig'], (result) => {
+chrome.storage.local.get(['extractedCode', 'hints', 'hintsError', 'llmConfig', 'moochBridgeConnected'], (result) => {
   if (!result.llmConfig) {
-    hintsDiv.innerHTML = `<p class="setup-msg">No API key configured. <a id="open-options" href="#">Open Settings →</a></p>`;
+    hintsDiv.innerHTML = `<p class="setup-msg">No provider configured. <a id="open-options" href="#">Open Settings →</a></p>`;
     document.getElementById('open-options')?.addEventListener('click', (e) => {
       e.preventDefault();
       chrome.runtime.openOptionsPage();
     });
     btn.setAttribute('disabled', 'true');
     return;
+  }
+
+  const config = result.llmConfig as { provider: string };
+
+  // Show connection mode indicator
+  if (config.provider === 'mooch') {
+    const badge = document.createElement('div');
+    badge.className = 'connection-badge';
+    const connected = !!result.moochBridgeConnected;
+    badge.innerHTML = `<span class="badge-dot ${connected ? 'connected' : 'disconnected'}"></span> Mooch ${connected ? 'connected' : 'disconnected'}`;
+    hintsDiv.parentElement?.insertBefore(badge, hintsDiv);
   }
 
   let state: HintsState;
@@ -30,7 +41,6 @@ chrome.storage.local.get(['extractedCode', 'hints', 'hintsError', 'llmConfig'], 
   } else if (result.hints) {
     state = { status: 'ready', hints: result.hints };
   } else {
-    // Code is extracted but no hints requested yet — show prompt
     state = { status: 'ready', hints: 'Code detected! Click **Get Hint** for guidance.' };
   }
   renderHints(hintsDiv, state);

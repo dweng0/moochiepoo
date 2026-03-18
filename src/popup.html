@@ -68,6 +68,16 @@
     .setup-msg { margin: 0; color: #8b95a8; }
     .setup-msg a { color: #5b7afe; text-decoration: none; }
     .setup-msg a:hover { text-decoration: underline; }
+    .connection-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.72rem; color: #8b95a8; margin-bottom: 8px;
+    }
+    .badge-dot {
+      display: inline-block; width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .badge-dot.connected { background: #4caf50; }
+    .badge-dot.disconnected { background: #ef5350; }
     .streaming-indicator { color: #3d5afe; animation: pulse 1s infinite; margin-left: 4px; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     #debug-toggle {

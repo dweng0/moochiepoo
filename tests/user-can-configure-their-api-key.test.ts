@@ -81,7 +81,7 @@ describe('Scenario: user can configure their API key', () => {
     storageData.llmConfig = { provider: 'anthropic', apiKey: 'sk-ant-saved', model: 'claude-haiku-4-5-20251001' };
     const config = await loadConfig();
     expect(config?.provider).toBe('anthropic');
-    expect(config?.apiKey).toBe('sk-ant-saved');
+    expect((config as { apiKey?: string })?.apiKey).toBe('sk-ant-saved');
   });
 });
 
@@ -154,6 +154,6 @@ describe('Scenario: Configure an open ai key', () => {
     const config = await loadConfig();
     expect(config?.provider).toBe('openai-compatible');
     expect((config as { baseUrl?: string })?.baseUrl).toBe('https://api.qwen.ai/v1');
-    expect(config?.model).toBe('qwen-turbo');
+    expect((config as { model?: string })?.model).toBe('qwen-turbo');
   });
 });

@@ -1,6 +1,7 @@
 export type LLMConfig =
   | { provider: 'anthropic'; apiKey: string; model: string }
-  | { provider: 'openai-compatible'; apiKey: string; baseUrl: string; model: string };
+  | { provider: 'openai-compatible'; apiKey: string; baseUrl: string; model: string }
+  | { provider: 'mooch' };
 
 export interface HintRequest {
   code: string;
@@ -25,8 +26,10 @@ export async function requestHint({ code, pageTitle, config }: HintRequest): Pro
 
   if (config.provider === 'anthropic') {
     return callAnthropic(prompt, config);
-  } else {
+  } else if (config.provider === 'openai-compatible') {
     return callOpenAICompatible(prompt, config);
+  } else {
+    throw new Error('Mooch provider should be handled by the bridge, not direct LLM client');
   }
 }
 

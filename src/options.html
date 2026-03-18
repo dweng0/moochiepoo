@@ -55,6 +55,39 @@
     }
     button:hover { background: #5b7afe; }
     #status { font-size: 0.85rem; color: #4caf50; }
+    .mode-cards { display: flex; gap: 10px; margin-bottom: 16px; }
+    .mode-card {
+      flex: 1;
+      padding: 14px;
+      background: #252d3d;
+      border: 2px solid #3a4459;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .mode-card:hover { border-color: #5b7fe8; }
+    .mode-card.active { border-color: #3d5afe; background: #2a3550; }
+    .mode-card-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+    .mode-card-desc { font-size: 0.75rem; color: #8b95a8; }
+    #mode-content { display: flex; flex-direction: column; gap: 16px; }
+    .mooch-status {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 14px;
+      background: #252d3d;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .mooch-dot {
+      display: inline-block; width: 8px; height: 8px;
+      border-radius: 50%; flex-shrink: 0;
+    }
+    .mooch-dot.connected { background: #4caf50; }
+    .mooch-dot.disconnected { background: #ef5350; }
+    .mooch-checking { color: #8b95a8; }
+    .mooch-connected-text { color: #4caf50; }
+    .mooch-info { font-size: 0.8rem; color: #8b95a8; line-height: 1.5; }
+    .mooch-session { font-size: 0.8rem; color: #a8b4c8; margin-top: 4px; }
+    .mooch-hint { font-size: 0.8rem; color: #6b7585; margin-top: 8px; line-height: 1.5; }
   </style>
 </head>
 <body>

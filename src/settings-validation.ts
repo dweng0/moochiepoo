@@ -11,6 +11,10 @@ export interface ApiKeyValidation {
 }
 
 export async function testConnection(config: LLMConfig): Promise<TestConnectionResult> {
+  if (config.provider === 'mooch') {
+    return { success: false, message: 'Use the Mooch desktop app to test provider connections' };
+  }
+
   try {
     if (config.provider === 'anthropic') {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
