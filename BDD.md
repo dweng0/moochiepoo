@@ -81,6 +81,157 @@ System: a Chrome extension called Mooch Helper that assists users during technic
             And inline code should appear in a monospace styled format
             And fenced code blocks should render as a distinct styled code block with syntax preserved and horizontal scrolling if needed
 
+    Feature: hint history
+
+        Scenario: view previous hints
+            Given the user has requested multiple hints during a session
+            When they scroll through the popup
+            Then they should see a scrollable list of all previous hints with timestamps
+            And the most recent hint should appear at the top
+
+    Feature: problem metadata extraction
+
+        Scenario: extract problem metadata from page
+            Given the user is on a coding challenge page that displays difficulty, tags, or constraints
+            When the content script extracts code
+            Then it should also extract available metadata (difficulty level, problem tags, constraints)
+            And include that metadata in the context sent to the LLM
+
+    Feature: language-aware prompting
+
+        Scenario: tailor LLM prompt to detected language
+            Given the code editor indicates a specific programming language (e.g. Python, JavaScript, Java)
+            When the user requests a hint
+            Then the system prompt sent to the LLM should reference the detected language
+            And the hint should include language-specific guidance
+
+    Feature: settings validation
+
+        Scenario: test API connection from settings
+            Given the user has entered their LLM provider configuration
+            When they click a Test Connection button on the settings page
+            Then the extension should make a lightweight test call to the configured LLM
+            And display whether the connection succeeded or failed with a clear message
+
+        Scenario: validate API key format
+            Given the user enters an API key on the settings page
+            When the key does not match the expected format for the selected provider
+            Then the settings page should show an inline validation warning before saving
+
+    Feature: streaming responses
+
+        Scenario: stream LLM response to popup
+            Given the user has clicked Get Hint and the LLM is generating a response
+            When tokens arrive from the LLM
+            Then the popup should display the response incrementally as it streams in
+            And show a subtle indicator that the response is still generating
+
+    Feature: keyboard shortcut
+
+        Scenario: request hint via keyboard shortcut
+            Given the user is on a supported coding challenge page
+            When they press Ctrl+Shift+H (or Cmd+Shift+H on macOS)
+            Then the extension should request a hint without needing to open the popup
+
+    Feature: configurable hint style
+
+        Scenario: choose hint verbosity level
+            Given the user opens the extension settings
+            When they select a hint style (gentle nudge, detailed explanation, or pseudocode outline)
+            And they request a hint
+            Then the LLM system prompt should reflect the chosen style
+            And the response should match the selected verbosity level
+
+    Feature: additional supported sites
+
+        Scenario: works on additional coding challenge platforms
+            Given the user navigates to CodeSignal, Exercism, or AlgoExpert
+            When the extension content script runs
+            Then it should successfully identify and extract the code editor content
+
+    Feature: robust markdown rendering
+
+        Scenario: handle complex markdown without rendering artifacts
+            Given the LLM returns a response with nested or mixed markdown (e.g. bold inside lists, adjacent bold and italic, code blocks with special characters)
+            When the hint is displayed in the popup
+            Then all markdown should render correctly without artifacts or broken formatting
+
+    Feature: unsupported site handling
+
+        Scenario: show friendly message on unsupported site
+            Given the user is on a website that is not a supported coding challenge platform
+            When they open the extension popup
+            Then the popup should display a message explaining that the current site is not supported
+            And list the supported platforms so the user knows where the extension works
+
+    Feature: first-time onboarding
+
+        Scenario: guide new user to configure API key
+            Given the user has just installed the extension and has not configured an LLM provider
+            When they open the extension popup for the first time
+            Then the popup should display a welcome message with a clear link or button to open settings
+            And it should not show the Get Hint button until a provider is configured
+
+    Feature: keyboard shortcut result display
+
+        Scenario: show hint result after keyboard shortcut
+            Given the user has triggered a hint request via the keyboard shortcut
+            When the LLM response is ready
+            Then the extension should open the popup automatically and display the hint
+            Or show a browser notification with a summary and a click-through to the full hint
+
+    Feature: hint history persistence
+
+        Scenario: persist hint history across popup open and close
+            Given the user has received hints and then closes the popup
+            When they reopen the popup on the same page
+            Then the previous hints should still be visible
+
+        Scenario: clear hint history on navigation
+            Given the user has accumulated hints for a coding challenge
+            When they navigate to a different problem or page
+            Then the hint history should be cleared so it does not mix with the new problem
+
+    Feature: code change impact on hints
+
+        Scenario: indicate stale hints after code changes
+            Given the user has received a hint and then modifies their code
+            When the polling detects a code change
+            Then existing hints should be visually marked as potentially stale
+            And the Get Hint button should indicate that updated context is available
+
+    Feature: large code handling
+
+        Scenario: handle code that exceeds LLM token limits
+            Given the extracted code is very large and may exceed the LLM context window
+            When the user requests a hint
+            Then the extension should truncate or summarise the code to fit within token limits
+            And inform the user that the code was trimmed with a brief notice
+
+    Feature: multi-tab awareness
+
+        Scenario: use code from the active tab
+            Given the user has multiple coding challenge tabs open
+            When they open the extension popup
+            Then the popup should display hints based on code from the currently active tab
+            And switching tabs and reopening the popup should reflect the new tab's code
+
+    Feature: offline detection
+
+        Scenario: show offline state when network is unavailable
+            Given the user has no network connection
+            When they click Get Hint
+            Then the popup should display a clear offline message instead of attempting the request
+            And automatically retry or re-enable the button when connectivity is restored
+
+    Feature: error recovery
+
+        Scenario: retry failed hint request
+            Given an LLM hint request has failed and an error is displayed
+            When the user sees the error in the popup
+            Then a Retry button should be shown alongside the error message
+            And clicking Retry should re-send the hint request
+
     Feature: A readme that is friendly for users who just want to get started
 
         Background:
