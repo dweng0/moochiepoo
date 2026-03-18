@@ -3,6 +3,7 @@ import { HintHistoryEntry } from './hint-history';
 export type HintsState =
   | { status: 'loading' }
   | { status: 'ready'; hints: string }
+  | { status: 'streaming'; partialHint: string }
   | { status: 'error'; message: string }
   | { status: 'no-code' };
 
@@ -124,6 +125,16 @@ export function renderHints(container: HTMLElement, state: HintsState): void {
       const el = document.createElement('div');
       el.innerHTML = markdownToHtml(state.hints);
       container.appendChild(el);
+      break;
+    }
+    case 'streaming': {
+      const el = document.createElement('div');
+      el.innerHTML = markdownToHtml(state.partialHint);
+      container.appendChild(el);
+      const indicator = document.createElement('span');
+      indicator.className = 'streaming-indicator';
+      indicator.textContent = '●';
+      container.appendChild(indicator);
       break;
     }
     case 'error': {
