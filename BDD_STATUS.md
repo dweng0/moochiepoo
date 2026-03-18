@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 37 scenario(s) across 11 test file(s).
+Checked 37 scenario(s) across 34 test file(s).
 
 
 ## Feature: code extraction
@@ -40,44 +40,44 @@ Checked 37 scenario(s) across 11 test file(s).
 
 ## Feature: problem metadata extraction
 
-- [ ] UNCOVERED: extract problem metadata from page
+- [x] extract problem metadata from page
 
 ## Feature: language-aware prompting
 
-- [ ] UNCOVERED: tailor LLM prompt to detected language
+- [x] tailor LLM prompt to detected language
 
 ## Feature: settings validation
 
-- [ ] UNCOVERED: test API connection from settings
-- [ ] UNCOVERED: validate API key format
+- [x] test API connection from settings
+- [x] validate API key format
 
 ## Feature: streaming responses
 
-- [ ] UNCOVERED: stream LLM response to popup
+- [x] stream LLM response to popup
 
 ## Feature: keyboard shortcut
 
-- [ ] UNCOVERED: request hint via keyboard shortcut
+- [x] request hint via keyboard shortcut
 
 ## Feature: configurable hint style
 
-- [ ] UNCOVERED: choose hint verbosity level
+- [x] choose hint verbosity level
 
 ## Feature: additional supported sites
 
-- [ ] UNCOVERED: works on additional coding challenge platforms
+- [x] works on additional coding challenge platforms
 
 ## Feature: robust markdown rendering
 
-- [ ] UNCOVERED: handle complex markdown without rendering artifacts
+- [x] handle complex markdown without rendering artifacts
 
 ## Feature: unsupported site handling
 
-- [ ] UNCOVERED: show friendly message on unsupported site
+- [x] show friendly message on unsupported site
 
 ## Feature: first-time onboarding
 
-- [ ] UNCOVERED: guide new user to configure API key
+- [x] guide new user to configure API key
 
 ## Feature: keyboard shortcut result display
 
@@ -85,16 +85,16 @@ Checked 37 scenario(s) across 11 test file(s).
 
 ## Feature: hint history persistence
 
-- [ ] UNCOVERED: persist hint history across popup open and close
-- [ ] UNCOVERED: clear hint history on navigation
+- [x] persist hint history across popup open and close
+- [x] clear hint history on navigation
 
 ## Feature: code change impact on hints
 
-- [ ] UNCOVERED: indicate stale hints after code changes
+- [x] indicate stale hints after code changes
 
 ## Feature: large code handling
 
-- [ ] UNCOVERED: handle code that exceeds LLM token limits
+- [x] handle code that exceeds LLM token limits
 
 ## Feature: multi-tab awareness
 
@@ -102,49 +102,24 @@ Checked 37 scenario(s) across 11 test file(s).
 
 ## Feature: offline detection
 
-- [ ] UNCOVERED: show offline state when network is unavailable
+- [x] show offline state when network is unavailable
 
 ## Feature: Mooch desktop integration
 
-- [ ] UNCOVERED: detect running Mooch desktop app
-- [ ] UNCOVERED: route hint requests through Mooch desktop
-- [ ] UNCOVERED: fall back to standalone mode when Mooch is unavailable
-- [ ] UNCOVERED: share provider configuration from Mooch desktop
-- [ ] UNCOVERED: send extracted code to Mooch for analysis
-- [ ] UNCOVERED: sync interview context from Mooch desktop
+- [x] detect running Mooch desktop app
+- [x] route hint requests through Mooch desktop
+- [x] fall back to standalone mode when Mooch is unavailable
+- [x] share provider configuration from Mooch desktop
+- [x] send extracted code to Mooch for analysis
+- [x] sync interview context from Mooch desktop
 
 ## Feature: error recovery
 
-- [ ] UNCOVERED: retry failed hint request
+- [x] retry failed hint request
 
 ## Feature: A readme that is friendly for users who just want to get started
 
 - [x] A new user to the Mooch ecosystem
 
 ---
-**14/37 scenarios covered.**
-
-23 scenario(s) need tests:
-- extract problem metadata from page
-- tailor LLM prompt to detected language
-- test API connection from settings
-- validate API key format
-- stream LLM response to popup
-- request hint via keyboard shortcut
-- choose hint verbosity level
-- works on additional coding challenge platforms
-- handle complex markdown without rendering artifacts
-- show friendly message on unsupported site
-- guide new user to configure API key
-- persist hint history across popup open and close
-- clear hint history on navigation
-- indicate stale hints after code changes
-- handle code that exceeds LLM token limits
-- show offline state when network is unavailable
-- detect running Mooch desktop app
-- route hint requests through Mooch desktop
-- fall back to standalone mode when Mooch is unavailable
-- share provider configuration from Mooch desktop
-- send extracted code to Mooch for analysis
-- sync interview context from Mooch desktop
-- retry failed hint request
+**37/37 scenarios covered.**
