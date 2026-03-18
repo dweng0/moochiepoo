@@ -1,3 +1,5 @@
+import { HintHistoryEntry } from './hint-history';
+
 export type HintsState =
   | { status: 'loading' }
   | { status: 'ready'; hints: string }
@@ -68,6 +70,44 @@ function markdownToHtml(markdown: string): string {
   html = html.replace(/^<br>/g, '');
   
   return html;
+}
+
+function formatTimestamp(ts: number): string {
+  const d = new Date(ts);
+  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+export function renderHintHistory(container: HTMLElement, entries: HintHistoryEntry[]): void {
+  container.innerHTML = '';
+
+  if (entries.length === 0) {
+    const p = document.createElement('p');
+    p.textContent = 'No hints yet. Click "Get Hint" to get started.';
+    container.appendChild(p);
+    return;
+  }
+
+  const list = document.createElement('div');
+  list.className = 'hint-history';
+
+  for (const entry of entries) {
+    const item = document.createElement('div');
+    item.className = 'hint-history-item';
+
+    const time = document.createElement('span');
+    time.className = 'hint-timestamp';
+    time.textContent = formatTimestamp(entry.timestamp);
+
+    const body = document.createElement('div');
+    body.className = 'hint-body';
+    body.innerHTML = markdownToHtml(entry.hint);
+
+    item.appendChild(time);
+    item.appendChild(body);
+    list.appendChild(item);
+  }
+
+  container.appendChild(list);
 }
 
 export function renderHints(container: HTMLElement, state: HintsState): void {

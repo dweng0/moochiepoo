@@ -224,6 +224,53 @@ System: a Chrome extension called Mooch Helper that assists users during technic
             Then the popup should display a clear offline message instead of attempting the request
             And automatically retry or re-enable the button when connectivity is restored
 
+    Feature: Mooch desktop integration
+
+        Contract: Mooch Local Bridge API (must match Mooch desktop BDD.md)
+            Base URL: http://localhost:62544
+            All requests use Content-Type: application/json
+            All requests must include header X-Mooch-Client: chrome-extension
+            GET /health → { status, version, activeSession }
+            GET /api/providers → { providers: [{ name, type, configured }] }
+            POST /api/hint → request: { code, pageTitle, language, metadata, hintStyle } → response: { hint }
+            POST /api/analyze → request: { code, context } → response: { analysis }
+
+        Scenario: detect running Mooch desktop app
+            Given the Mooch desktop app may or may not be running on the user's machine
+            When the extension starts or the user opens the popup
+            Then it should probe GET http://localhost:62544/health with header X-Mooch-Client: chrome-extension
+            And display a connection indicator showing whether Mooch desktop is available
+
+        Scenario: route hint requests through Mooch desktop
+            Given the Mooch desktop app is running and detected via /health
+            When the user requests a hint
+            Then the extension should POST to http://localhost:62544/api/hint with { code, pageTitle, language, metadata, hintStyle }
+            And display the returned { hint } in the popup as normal
+
+        Scenario: fall back to standalone mode when Mooch is unavailable
+            Given the Mooch desktop app is not running (GET /health fails or times out)
+            When the user requests a hint
+            Then the extension should use its own configured LLM provider as usual
+            And not show any error about Mooch being unavailable
+
+        Scenario: share provider configuration from Mooch desktop
+            Given the Mooch desktop app is running
+            When the user opens the extension settings
+            Then the extension should call GET http://localhost:62544/api/providers
+            And offer an option to use Mooch's configured providers so the user does not need to enter API keys separately
+
+        Scenario: send extracted code to Mooch for analysis
+            Given the Mooch desktop app is running and has code analysis capability
+            When the extension extracts code from a coding challenge page
+            Then it should be able to POST to http://localhost:62544/api/analyze with { code, context }
+            And receive richer analysis that leverages Mooch's full provider stack
+
+        Scenario: sync interview context from Mooch desktop
+            Given the user has an active interview session in Mooch desktop (activeSession is not null in /health)
+            When the extension requests a hint via POST /api/hint
+            Then the Mooch desktop app will automatically include the interview's job description and resume context
+            And the LLM response should be tailored to the specific role the user is interviewing for
+
     Feature: error recovery
 
         Scenario: retry failed hint request
