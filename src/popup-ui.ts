@@ -1,4 +1,5 @@
 import { HintHistoryEntry } from './hint-history';
+import { getSupportedSiteNames } from './site-profiles';
 
 export type HintsState =
   | { status: 'loading' }
@@ -150,4 +151,22 @@ export function renderHints(container: HTMLElement, state: HintsState): void {
       break;
     }
   }
+}
+
+export function renderUnsupportedSite(container: HTMLElement): void {
+  container.innerHTML = '';
+  const p = document.createElement('p');
+  p.textContent = 'This site is not supported. Mooch Helper works on: ' + getSupportedSiteNames().join(', ') + '.';
+  container.appendChild(p);
+}
+
+export function renderOnboarding(container: HTMLElement): void {
+  container.innerHTML = '';
+  const p = document.createElement('p');
+  p.textContent = 'Welcome to Mooch Helper! Configure your LLM provider to get started.';
+  container.appendChild(p);
+  const btn = document.createElement('a');
+  btn.textContent = 'Open Settings';
+  btn.href = '#';
+  container.appendChild(btn);
 }
