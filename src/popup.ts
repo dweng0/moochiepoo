@@ -30,7 +30,8 @@ chrome.storage.local.get(['extractedCode', 'hints', 'hintsError', 'llmConfig'], 
   } else if (result.hints) {
     state = { status: 'ready', hints: result.hints };
   } else {
-    state = { status: 'no-code' };
+    // Code is extracted but no hints requested yet — show prompt
+    state = { status: 'ready', hints: 'Code detected! Click **Get Hint** for guidance.' };
   }
   renderHints(hintsDiv, state);
 });
