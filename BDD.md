@@ -279,6 +279,43 @@ System: a Chrome extension called Mooch Helper that assists users during technic
             Then a Retry button should be shown alongside the error message
             And clicking Retry should re-send the hint request
 
+    Feature: code panel display
+
+        Scenario: render code blocks in a styled code panel
+            Given the LLM returns a hint response containing a code solution or snippet
+            When the hint is displayed in the popup
+            Then any code blocks should be rendered inside a visually distinct "code panel"
+            And the panel should use a monospace font with syntax highlighting
+            And the panel should have a dark background to distinguish it from prose text
+            And long code lines should scroll horizontally rather than wrap
+
+    Feature: copy code button
+
+        Scenario: copy code from a code panel
+            Given a code panel is displayed in the popup
+            When the user clicks the copy button (rendered using lucide-react Copy icon) in the top-right corner of the panel
+            Then the code content should be copied to the clipboard
+            And the button icon should briefly change to a Check icon to confirm the copy succeeded
+            And after 2 seconds the button should revert to the Copy icon
+
+    Feature: regenerate hint
+
+        Scenario: Get Hint button changes to Regenerate after first hint
+            Given the user has already received at least one hint for the current page
+            When the popup is open
+            Then the "Get Hint" button label should change to "Regenerate"
+            And clicking "Regenerate" should request a new hint from the LLM
+            And the new hint should be prepended to the hint history
+
+    Feature: user context input
+
+        Scenario: add user context to hint request
+            Given the user opens the extension popup
+            When a small collapsible context input panel is visible below the hint button
+            And the user types additional context (e.g. "I am not allowed to use extra space") into the text area
+            Then clicking Get Hint or Regenerate should include that context text in the LLM request payload alongside the extracted code
+            And the LLM prompt should incorporate the user-provided context so the hint is tailored accordingly
+
     Feature: A readme that is friendly for users who just want to get started
 
         Background:
