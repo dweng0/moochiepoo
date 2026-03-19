@@ -1,4 +1,10 @@
 # Mooch Helper
+<div align="center">
+<img src="moochiepoo.svg" width="180" alt="MoochiePoo the baby bunny"/>
+
+Meet MoochiePoo
+</div>
+
 [![Evolution](https://github.com/dweng0/moochiepoo/actions/workflows/evolve.yml/badge.svg)](https://github.com/dweng0/moochiepoo/actions/workflows/evolve.yml)
 
 
