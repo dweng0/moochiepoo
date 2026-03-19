@@ -10,6 +10,10 @@ Meet MoochiePoo
 
 A Chrome extension that assists you during technical interviews by extracting code from coding challenge websites and providing LLM-powered hints — without giving away the answer.
 
+## Screenshot
+
+![Mooch Helper in action](moochiepoo.gif)
+
 ## What it does
 
 - Detects when you're on a supported coding challenge site
