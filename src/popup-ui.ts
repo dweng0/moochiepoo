@@ -169,6 +169,34 @@ export function renderOnboarding(container: HTMLElement): void {
   container.appendChild(btn);
 }
 
+export function renderContextInput(container: HTMLElement, onChange: (value: string) => void): void {
+  container.innerHTML = '';
+
+  const toggle = document.createElement('button');
+  toggle.className = 'context-toggle';
+  toggle.textContent = '+ Add context';
+  toggle.type = 'button';
+
+  const panel = document.createElement('div');
+  panel.className = 'context-input-panel';
+  panel.style.display = 'none';
+
+  const textarea = document.createElement('textarea');
+  textarea.placeholder = 'e.g. I am not allowed to use extra space';
+  textarea.rows = 3;
+  textarea.addEventListener('input', () => onChange(textarea.value));
+
+  panel.appendChild(textarea);
+  container.appendChild(toggle);
+  container.appendChild(panel);
+
+  toggle.addEventListener('click', () => {
+    const expanded = panel.style.display !== 'none';
+    panel.style.display = expanded ? 'none' : 'block';
+    toggle.textContent = expanded ? '+ Add context' : '− Add context';
+  });
+}
+
 export function attachCopyHandlers(container: HTMLElement): void {
   container.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
     btn.addEventListener('click', () => {

@@ -1,4 +1,4 @@
-import { renderHints, HintsState } from './popup-ui';
+import { renderHints, renderContextInput, HintsState } from './popup-ui';
 import { createGetHintButton } from './popup-button';
 
 const hintsDiv = document.getElementById('hints') as HTMLElement;
@@ -9,6 +9,14 @@ const debugToggle = document.getElementById('debug-toggle') as HTMLElement;
 // Add the Get Hint button
 const btn = createGetHintButton(hintsDiv, renderHints);
 btnContainer.appendChild(btn);
+
+// Add collapsible user context input
+const contextContainer = document.createElement('div');
+contextContainer.id = 'context-container';
+btnContainer.appendChild(contextContainer);
+renderContextInput(contextContainer, (value) => {
+  chrome.storage.local.set({ userContext: value });
+});
 
 // Show current state on open
 chrome.storage.local.get(['extractedCode', 'hints', 'hintsError', 'llmConfig', 'moochBridgeConnected'], (result) => {

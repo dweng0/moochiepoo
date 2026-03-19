@@ -7,22 +7,27 @@ export interface HintRequest {
   code: string;
   pageTitle: string;
   config: LLMConfig;
+  userContext?: string;
 }
 
 const SYSTEM_PROMPT =
   'You are a helpful coding interview assistant. Given a coding challenge and the user\'s current code, provide hints, tips, and concrete code examples to help them solve it. Include short code snippets showing relevant patterns, data structure usage, or partial implementations that illustrate the approach.';
 
-export function buildPrompt(code: string, pageTitle: string, language?: string | null): string {
+export function buildPrompt(code: string, pageTitle: string, language?: string | null, userContext?: string): string {
   let prompt = `Challenge: ${pageTitle}\n\n`;
   if (language) {
     prompt += `Language: ${language}\n\n`;
   }
-  prompt += `Current code:\n\`\`\`\n${code}\n\`\`\`\n\nProvide helpful hints with concrete code examples showing the approach.`;
+  prompt += `Current code:\n\`\`\`\n${code}\n\`\`\`\n\n`;
+  if (userContext && userContext.trim()) {
+    prompt += `Additional context from the user: ${userContext.trim()}\n\n`;
+  }
+  prompt += `Provide helpful hints with concrete code examples showing the approach.`;
   return prompt;
 }
 
-export async function requestHint({ code, pageTitle, config }: HintRequest): Promise<string> {
-  const prompt = buildPrompt(code, pageTitle);
+export async function requestHint({ code, pageTitle, config, userContext }: HintRequest): Promise<string> {
+  const prompt = buildPrompt(code, pageTitle, undefined, userContext);
 
   if (config.provider === 'anthropic') {
     return callAnthropic(prompt, config);

@@ -22,8 +22,8 @@ chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
 });
 
 async function handleHintRequest(): Promise<void> {
-  const { extractedCode, pageTitle, llmConfig } = await chrome.storage.local.get([
-    'extractedCode', 'pageTitle', 'llmConfig'
+  const { extractedCode, pageTitle, llmConfig, userContext } = await chrome.storage.local.get([
+    'extractedCode', 'pageTitle', 'llmConfig', 'userContext'
   ]);
 
   if (!extractedCode) {
@@ -57,7 +57,8 @@ async function handleHintRequest(): Promise<void> {
     const hints = await requestHint({
       code: extractedCode,
       pageTitle: pageTitle ?? 'Coding Challenge',
-      config: config as LLMConfig
+      config: config as LLMConfig,
+      userContext: userContext as string | undefined,
     });
     chrome.storage.local.set({ hints, hintsError: null });
   } catch (err) {

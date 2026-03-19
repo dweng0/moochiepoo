@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 41 scenario(s) across 36 test file(s).
+Checked 41 scenario(s) across 37 test file(s).
 
 
 ## Feature: code extraction
