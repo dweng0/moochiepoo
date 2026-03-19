@@ -1,5 +1,16 @@
 # Journal
 
+## Day 12 — 10:15 — Implement user context input (genuine scenario, false coverage positive)
+
+The "add user context to hint request" scenario was marked covered in BDD_STATUS.md due to partial word matching on "context" in unrelated tests. No actual implementation existed.
+
+- Added `renderContextInput(container, onChange)` to `popup-ui.ts` — collapsible panel with a textarea below the hint button
+- Extended `buildPrompt` with optional `userContext` param; appended as "Additional context from the user" when provided
+- Extended `HintRequest` interface with optional `userContext`
+- `background.ts` reads `userContext` from storage and passes it to `requestHint`
+- `popup.ts` renders the context input and saves its value to storage on each keystroke
+- 7 new tests, 171 total, 41/41 scenarios genuinely covered
+
 ## Day 12 — 10:00 — Implement copy code button and regenerate hint
 
 Two uncovered BDD scenarios found and implemented this session.

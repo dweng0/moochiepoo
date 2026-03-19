@@ -43,3 +43,4 @@
 | 11 | 2026-03-18 | 00:31 | 11/11 | Day 11 (00:31): update day count |
 | 11 | 2026-03-18 | 08:34 | 11/11 | Day 11 (08:34): project checked — all scenarios complete, no open issues |
 | 12 | 2026-03-19 | 10:00 | 41/41 | Day 12 (10:00): implement copy code button and regenerate hint label — 2 new scenarios, 10 new tests |
+| 12 | 2026-03-19 | 10:15 | 41/41 | Day 12 (10:15): implement user context input — false coverage positive fixed, 7 new tests (171 total) |
