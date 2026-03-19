@@ -10,6 +10,14 @@ export function createGetHintButton(hintsDiv: HTMLElement, render: RenderFn): HT
   btn.textContent = 'Get Hint';
   btn.id = 'get-hint-btn';
 
+  // Set label to "Regenerate" if hints have already been received
+  chrome.storage.local.get(['hintHistory'], (result) => {
+    const history = result['hintHistory'] as Array<unknown> | undefined;
+    if (history && history.length > 0) {
+      btn.textContent = 'Regenerate';
+    }
+  });
+
   // Keep a reference so we can cancel polling
   let pollInterval: ReturnType<typeof setInterval> | null = null;
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -20,6 +28,7 @@ export function createGetHintButton(hintsDiv: HTMLElement, render: RenderFn): HT
       stopPolling();
       render(hintsDiv, { status: 'ready', hints: changes.hints.newValue as string });
       btn.removeAttribute('disabled');
+      btn.textContent = 'Regenerate';
     }
     if ('hintsError' in changes && changes.hintsError.newValue) {
       stopPolling();

@@ -19,7 +19,10 @@ function markdownToHtml(markdown: string): string {
   html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, (_match, lang, code) => {
     const idx = codeBlocks.length;
     const escaped = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    codeBlocks.push(`<pre><code class="${lang}">${escaped.trimEnd()}</code></pre>`);
+    const rawCode = code.trimEnd().replace(/"/g, '&quot;');
+    codeBlocks.push(
+      `<div class="code-panel"><button class="copy-btn" data-code="${rawCode}" title="Copy code"></button><pre><code class="${lang}">${escaped.trimEnd()}</code></pre></div>`
+    );
     return `%%CODEBLOCK_${idx}%%`;
   });
 
@@ -164,4 +167,16 @@ export function renderOnboarding(container: HTMLElement): void {
   btn.textContent = 'Open Settings';
   btn.href = '#';
   container.appendChild(btn);
+}
+
+export function attachCopyHandlers(container: HTMLElement): void {
+  container.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const code = btn.getAttribute('data-code') ?? '';
+      navigator.clipboard.writeText(code).then(() => {
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 2000);
+      });
+    });
+  });
 }

@@ -1,6 +1,6 @@
 # BDD Status
 
-Checked 37 scenario(s) across 34 test file(s).
+Checked 41 scenario(s) across 36 test file(s).
 
 
 ## Feature: code extraction
@@ -117,9 +117,25 @@ Checked 37 scenario(s) across 34 test file(s).
 
 - [x] retry failed hint request
 
+## Feature: code panel display
+
+- [x] render code blocks in a styled code panel
+
+## Feature: copy code button
+
+- [x] copy code from a code panel
+
+## Feature: regenerate hint
+
+- [x] Get Hint button changes to Regenerate after first hint
+
+## Feature: user context input
+
+- [x] add user context to hint request
+
 ## Feature: A readme that is friendly for users who just want to get started
 
 - [x] A new user to the Mooch ecosystem
 
 ---
-**37/37 scenarios covered.**
+**41/41 scenarios covered.**
